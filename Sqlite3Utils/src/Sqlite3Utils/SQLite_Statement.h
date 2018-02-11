@@ -17,7 +17,11 @@ public:
 
 public:
 	void execute();
+
+	void finalize();
+
 	void reset();
+	void clear();
 
 	void bindInt(int index, int value);
 	void bindDouble(int index, double value);

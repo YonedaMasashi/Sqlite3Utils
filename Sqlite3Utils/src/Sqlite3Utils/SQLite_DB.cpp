@@ -64,7 +64,7 @@ SQLite_Statement* SQLite_DB::prepared(const string& sql)
 		sqlite3_prepare(database, sql.c_str(), -1, &stm, NULL),
 		"prepared database error:" + sql
 	);
-	if (stm != NULL) {
+	if (stm == NULL) {
 		SQLite_Error error(database, "prepared stm null:" + sql);
 		throw error;
 	}
@@ -76,4 +76,9 @@ SQLite_Statement* SQLite_DB::prepared(const string& sql)
 void SQLite_DB::executeStatement(SQLite_Statement* statement)
 {
 	statement->execute();
+}
+
+long long SQLite_DB::getLastInsertRowId() 
+{
+	return sqlite3_last_insert_rowid(this->database);
 }

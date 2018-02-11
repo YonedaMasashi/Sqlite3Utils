@@ -26,6 +26,8 @@ public:
 	SQLite_Statement* prepared(const string& sql);
 	void executeStatement(SQLite_Statement* statement);
 
+	long long getLastInsertRowId();
+
 private:
 	sqlite3* database;
 

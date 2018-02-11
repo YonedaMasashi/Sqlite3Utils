@@ -29,5 +29,8 @@
     <ClCompile Include="SQLite_DBTest.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="SQLite_StatementTest.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

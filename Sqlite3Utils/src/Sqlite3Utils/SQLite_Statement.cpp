@@ -21,6 +21,11 @@ void SQLite_Statement::execute()
 	}
 }
 
+void SQLite_Statement::finalize()
+{
+	sqlite3_finalize(this->statement);
+}
+
 void SQLite_Statement::reset()
 {
 	SQLite_Error::checkError(
@@ -31,6 +36,14 @@ void SQLite_Statement::reset()
 	SQLite_Error::checkError(
 		sqlite3_clear_bindings(this->statement),
 		"SQLite_Statement::reset(sqlite3_clear_bindings)"
+	);
+}
+
+void SQLite_Statement::clear()
+{
+	SQLite_Error::checkError(
+		sqlite3_clear_bindings(this->statement),
+		"SQLite_Statement::clear()"
 	);
 }
 
