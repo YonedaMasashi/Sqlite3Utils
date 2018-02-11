@@ -1,0 +1,24 @@
+# 準備
+- 以下のページから Source Code と DLL をダウンロード
+> https://www.sqlite.org/download.html
+
+- lib ファイルを生成する
+ 1. VS の開発者用コマンドラインを起動
+ 2. ダウンロードした DLL の zip の展開フォルダで以下を実行
+> lib /def:sqlite3.def /machine:x86
+> (64bit DLL の場合は /machine:x64)
+
+- Sqlite3Utils\sqlite3\src 下に
+  ダウンロードしたソースコードを配置
+  
+- Sqlite3Utils\sqlite3\lib\win32 下に
+  x86 版の dll を配置
+
+- Sqlite3Utils\sqlite3\lib\win64 下に
+  x64 版の dll を配置
+
+- Sqlite3Utils\test_lib\win32 下に
+  x86 版の dll を配置
+  
+- Sqlite3Utils\test_lib\lib\win64 下に
+  x64 版の dll を配置

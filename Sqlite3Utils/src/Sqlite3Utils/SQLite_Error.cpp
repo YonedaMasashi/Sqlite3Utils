@@ -19,14 +19,14 @@ SQLite_Error::~SQLite_Error()
 {
 }
 
-void checkError(int errorCode, string addMsg) {
+void SQLite_Error::checkError(int errorCode, string addMsg) {
 	SQLite_Error error(errorCode, addMsg);
 	if (error.isError()) {
 		throw error;
 	}
 }
 
-static void checkError(sqlite3* database, string addMsg) {
+void SQLite_Error::checkError(sqlite3* database, string addMsg) {
 	checkError(sqlite3_errcode(database), addMsg);
 }
 
