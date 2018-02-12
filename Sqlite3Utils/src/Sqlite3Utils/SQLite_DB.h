@@ -24,7 +24,6 @@ public:
 	void begin();
 	void commit();
 	SQLite_Statement* prepared(const string& sql);
-	void executeStatement(SQLite_Statement* statement);
 
 	long long getLastInsertRowId();
 

@@ -72,11 +72,6 @@ SQLite_Statement* SQLite_DB::prepared(const string& sql)
 	return pSQLite_Statement;
 }
 
-void SQLite_DB::executeStatement(SQLite_Statement* statement)
-{
-	statement->execute();
-}
-
 long long SQLite_DB::getLastInsertRowId() 
 {
 	return sqlite3_last_insert_rowid(this->database);

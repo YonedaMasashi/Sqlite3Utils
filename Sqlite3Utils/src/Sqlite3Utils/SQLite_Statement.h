@@ -16,10 +16,7 @@ public:
 	~SQLite_Statement();
 
 public:
-	void execute();
-	
-	// for column access functions. 
-	// (true: exist any data, false: no data);
+	// –ß‚è’l(å‚É select •¶‚ÌÀs—p true: exist any data, false: no data);
 	bool step();
 
 	void finalize();

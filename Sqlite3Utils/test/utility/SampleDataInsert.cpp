@@ -30,7 +30,7 @@ void SampleDataInsert::execute(SQLite_DB& sqLiteDb)
 		if (idx % 2 == 0) {
 			stmt->bindInt(2, idx + 1000);
 		}
-		stmt->execute();
+		stmt->step();
 
 		stmt->reset();
 		stmt->clear();

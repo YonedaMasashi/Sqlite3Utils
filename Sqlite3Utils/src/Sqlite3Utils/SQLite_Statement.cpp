@@ -13,18 +13,6 @@ SQLite_Statement::~SQLite_Statement()
 {
 }
 
-void SQLite_Statement::execute()
-{
-	int errCode = sqlite3_step(this->statement);
-
-	// SQLITE_OK, SQLITE_ROW and SQLITE_DONE are non-error result codes.
-	if (errCode == SQLITE_OK || errCode == SQLITE_ROW || errCode == SQLITE_DONE) {
-		return;
-	}
-	SQLite_Error error(errCode, "SQLite_Statement::execute\n  currentSql:" + currentSql);
-	throw error;
-}
-
 bool SQLite_Statement::step() {
 	int errCode = sqlite3_step(this->statement);
 	if (errCode == SQLITE_ROW) {
