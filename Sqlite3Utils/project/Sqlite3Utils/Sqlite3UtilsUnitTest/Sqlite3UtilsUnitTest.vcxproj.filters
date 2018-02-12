@@ -16,9 +16,21 @@
       <Filter>case</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\test\stdafx.cpp" />
+    <ClCompile Include="..\..\..\test\utility\TestExecutor.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\test\utility\SampleDataInsert.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\test\stdafx.h" />
     <ClInclude Include="..\..\..\test\targetver.h" />
+    <ClInclude Include="..\..\..\test\utility\TestExecutor.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\test\utility\SampleDataInsert.h">
+      <Filter>utility</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

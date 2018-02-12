@@ -12,11 +12,15 @@ using namespace std;
 class SQLite_Statement
 {
 public:
-	SQLite_Statement(sqlite3_stmt* statement);
+	SQLite_Statement(sqlite3_stmt* statement, string sql);
 	~SQLite_Statement();
 
 public:
 	void execute();
+	
+	// for column access functions. 
+	// (true: exist any data, false: no data);
+	bool step();
 
 	void finalize();
 
@@ -30,7 +34,15 @@ public:
 
 	int columnCount();
 
+	// The leftmost column is number 0.
+	string getColumnName(int columnIndex);
+
+	// The leftmost column of the result set has the index 0.
+	int getInt(int columnIndex);
+	
+
 private:
+	string currentSql;
 	sqlite3_stmt* statement;
 
 };

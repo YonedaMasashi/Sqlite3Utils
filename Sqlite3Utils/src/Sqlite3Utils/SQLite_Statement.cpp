@@ -3,8 +3,9 @@
 #include "Sqlite3Utils/SQLite_Error.h"
 
 
-SQLite_Statement::SQLite_Statement(sqlite3_stmt* statement)
+SQLite_Statement::SQLite_Statement(sqlite3_stmt* statement, string sql)
 {
+	currentSql = sql;
 	this->statement = statement;
 }
 
@@ -15,10 +16,27 @@ SQLite_Statement::~SQLite_Statement()
 void SQLite_Statement::execute()
 {
 	int errCode = sqlite3_step(this->statement);
-	if (errCode != SQLITE_DONE) {
-		SQLite_Error error(errCode, "SQLite_Statement::execute");
-		throw error;
+
+	// SQLITE_OK, SQLITE_ROW and SQLITE_DONE are non-error result codes.
+	if (errCode == SQLITE_OK || errCode == SQLITE_ROW || errCode == SQLITE_DONE) {
+		return;
 	}
+	SQLite_Error error(errCode, "SQLite_Statement::execute\n  currentSql:" + currentSql);
+	throw error;
+}
+
+bool SQLite_Statement::step() {
+	int errCode = sqlite3_step(this->statement);
+	if (errCode == SQLITE_ROW) {
+		return true;
+	}
+
+	// SQLITE_DONE ‚ª‹A‚Á‚Ä‚­‚é‚Í‚¸‚¾‚ªA”O‚Ì‚½‚ß OK ‚à
+	if (errCode == SQLITE_OK || errCode == SQLITE_DONE) {
+		return false;
+	}
+	SQLite_Error error(errCode, "SQLite_Statement::step\n  currentSql:" + currentSql);
+	throw error;
 }
 
 void SQLite_Statement::finalize()
@@ -30,12 +48,12 @@ void SQLite_Statement::reset()
 {
 	SQLite_Error::checkError(
 		sqlite3_reset(this->statement),
-		"SQLite_Statement::reset(sqlite3_reset)"
+		"SQLite_Statement::reset(sqlite3_reset)\n  currentSql:" + currentSql
 	);
 
 	SQLite_Error::checkError(
 		sqlite3_clear_bindings(this->statement),
-		"SQLite_Statement::reset(sqlite3_clear_bindings)"
+		"SQLite_Statement::reset(sqlite3_clear_bindings)\n  currentSql:" + currentSql
 	);
 }
 
@@ -43,7 +61,7 @@ void SQLite_Statement::clear()
 {
 	SQLite_Error::checkError(
 		sqlite3_clear_bindings(this->statement),
-		"SQLite_Statement::clear()"
+		"SQLite_Statement::clear()\n  currentSql:" + currentSql
 	);
 }
 
@@ -65,4 +83,13 @@ void SQLite_Statement::bindBlob(int index, const void* value, int size) {
 
 int SQLite_Statement::columnCount() {
 	return sqlite3_column_count(statement);
+}
+
+string SQLite_Statement::getColumnName(int columnIndex) {
+	const char* columneName = sqlite3_column_name(statement, columnIndex);
+	return (reinterpret_cast<char const *>(columneName));
+}
+
+int SQLite_Statement::getInt(int columnIndex) {
+	return sqlite3_column_int(statement, columnIndex);
 }

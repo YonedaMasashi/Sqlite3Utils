@@ -3,7 +3,6 @@
 #include "Sqlite3Utils/SQLite_Error.h"
 #include "Sqlite3Utils/SQLite_Statement.h"
 
-
 SQLite_DB::SQLite_DB()
 {
 }
@@ -69,7 +68,7 @@ SQLite_Statement* SQLite_DB::prepared(const string& sql)
 		throw error;
 	}
 
-	SQLite_Statement* pSQLite_Statement = new SQLite_Statement(stm);
+	SQLite_Statement* pSQLite_Statement = new SQLite_Statement(stm, sql);
 	return pSQLite_Statement;
 }
 

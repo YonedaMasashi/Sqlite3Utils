@@ -174,10 +174,14 @@
     <ClCompile Include="..\..\..\test\case\SQLite_DBTest.cpp" />
     <ClCompile Include="..\..\..\test\case\SQLite_StatementTest.cpp" />
     <ClCompile Include="..\..\..\test\stdafx.cpp" />
+    <ClCompile Include="..\..\..\test\utility\SampleDataInsert.cpp" />
+    <ClCompile Include="..\..\..\test\utility\TestExecutor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\test\stdafx.h" />
     <ClInclude Include="..\..\..\test\targetver.h" />
+    <ClInclude Include="..\..\..\test\utility\SampleDataInsert.h" />
+    <ClInclude Include="..\..\..\test\utility\TestExecutor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
